@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="divlogin"></div>
+    <button id="btnlogin">Login</button>
+    <script>
+        const btnLogin=document.getElementById("btnlogin")
+
+        const d=document.getElementById("divlogin");
+        if(document.cookie){
+            const user=document.cookie.split("=")[1];
+            d.textContent=`Hey ${user}, We know you`;
+            btnLogin.style.display='none'
+        }
+
+        btnLogin.addEventListener("click",e=>{
+            const user=prompt("Who are you?")
+            fetch(`${document.location.href}login?user=${user}`)
+            .then(a=>a.text())
+            .then(a=>alert(a))
+            .catch(e=>console.log(e))
+        })
+    </script>
+</body>
+</html>
